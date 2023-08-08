@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import ReactFlow, {Background, Controls}  from 'reactflow';
+import { useState, useCallback } from 'react';
+import ReactFlow, {Background, Controls, applyNodeChanges, applyEdgeChanges}  from 'reactflow';
 import 'reactflow/dist/style.css';
 import './App.css';
 
@@ -23,9 +23,24 @@ function App() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
   const [variant, setVariant] = useState('lines');
+
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    []
+  );
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    []
+  );
   return (
     <>
-    <ReactFlow>
+    <ReactFlow 
+      nodes={nodes}
+      onNodesChange={onNodesChange}
+      edges={edges}
+      onEdgesChange={onEdgesChange}
+    >
+      
       <Background variant={variant} color={'green'} gap={'50'}/>
       <Controls/>
     </ReactFlow>
