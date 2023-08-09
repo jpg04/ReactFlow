@@ -1,7 +1,9 @@
 import { useState, useCallback } from 'react';
-import ReactFlow, {Background, Controls, applyNodeChanges, applyEdgeChanges}  from 'reactflow';
+import ReactFlow, {Background, Controls, applyNodeChanges, applyEdgeChanges, Handle}  from 'reactflow';
 import 'reactflow/dist/style.css';
 import './App.css';
+
+import TextUpdaterNode from './Components/TextUpdaterNode';
 
 const initialNodes = [
   {
@@ -43,6 +45,7 @@ function App() {
       
       <Background variant={variant} color={'green'} gap={'50'}/>
       <Controls/>
+      <Handle/>
     </ReactFlow>
     </>
   );
